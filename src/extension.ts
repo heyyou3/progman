@@ -30,11 +30,15 @@ export function activate({ subscriptions }: vscode.ExtensionContext) {
 			const doneCount = activeText.split('- [x] ').length - 1;
 			const allTodoCount = todoCount + doneCount;
 			const progress = Math.floor(doneCount / allTodoCount * 100);
-			progManStatusBarItem.text = `☆今の進捗率は${progress}%だよ！やったね☆`;
+			progManStatusBarItem.text = getProgMsg(progress);
 			progManStatusBarItem.show();
 		}
 	}));
 }
+
+const getProgMsg = (progress: number): string => {
+	return `進捗率: ${progress}%`;
+};
 
 // this method is called when your extension is deactivated
 export function deactivate() {}
