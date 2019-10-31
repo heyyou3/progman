@@ -2,39 +2,43 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+let progManStatusBarItem: vscode.StatusBarItem;
+let activeEditor = vscode.window.activeTextEditor;
+
 export function activate({ subscriptions }: vscode.ExtensionContext) {
-
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "progman" is now active!');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let progManStatusBarItem: vscode.StatusBarItem;
 	progManStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
 	subscriptions.push(progManStatusBarItem);
 
-	let activeEditor = vscode.window.activeTextEditor;
+	// ファイルを切り替えた際にステータスバーをアップデートする
+	subscriptions.push(vscode.window.onDidChangeActiveTextEditor(updateActiveTextEditor));
 
-	subscriptions.push(vscode.window.onDidChangeActiveTextEditor(editor => {
-		activeEditor = editor;
-	}));
-
-	subscriptions.push(vscode.workspace.onDidChangeTextDocument(event => {
-		if (activeEditor && event.document === activeEditor.document) {
-			const activeText = event.document.getText();
-			const todoCount = activeText.split('- [ ] ').length - 1;
-			const doneCount = activeText.split('- [x] ').length - 1;
-			const allTodoCount = todoCount + doneCount;
-			const progress = Math.floor(doneCount / allTodoCount * 100);
-			progManStatusBarItem.text = getProgMsg(progress);
-			progManStatusBarItem.show();
-		}
-	}));
+	// ファイルが書き換わった際にステータスバーをアップデートする
+	subscriptions.push(vscode.workspace.onDidChangeTextDocument(updateChangeTextDocument));
 }
+
+const updateActiveTextEditor = (editor: vscode.TextEditor | undefined): void => {
+	activeEditor = editor;
+
+	if (activeEditor && activeEditor.document.languageId === 'markdown') {
+		progManStatusBarItem.show();
+	} else {
+		progManStatusBarItem.hide();
+	}
+};
+
+const updateChangeTextDocument = (event: vscode.TextDocumentChangeEvent): void => {
+	if (activeEditor && event.document === activeEditor.document && activeEditor.document.languageId === 'markdown') {
+		const activeText = event.document.getText();
+		const todoCount = activeText.split('- [ ] ').length - 1;
+		const doneCount = activeText.split('- [x] ').length - 1;
+		const allTodoCount = todoCount + doneCount;
+		const progress = Math.floor(doneCount / allTodoCount * 100);
+		progManStatusBarItem.text = getProgMsg(progress);
+		progManStatusBarItem.show();
+	} else {
+		progManStatusBarItem.hide();
+	}
+};
 
 const getProgMsg = (progress: number): string => {
 	return `進捗率: ${progress}%`;
