@@ -1,6 +1,6 @@
 # progman
 
-[JP README](./README_JP.md)
+[JP README](./README.md)
 
 ## WHAT
 
