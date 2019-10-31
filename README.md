@@ -4,7 +4,8 @@
 
 ## WHAT
 
-- `.md` ファイルに書かれた TODO の進捗率を表示してくれます
+- [VSCode](https://code.visualstudio.com)の拡張機能です。
+- `.md` ファイルに書かれた TODO の進捗率を表示してくれます。
 
 ## WHY
 

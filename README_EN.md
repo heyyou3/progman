@@ -4,6 +4,7 @@
 
 ## WHAT
 
+- An extension of [VSCode](https://code.visualstudio.com).
 - Display the progress rate of TODO in Markdown file
 
 ## WHY
