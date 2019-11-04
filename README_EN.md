@@ -4,7 +4,6 @@
 
 ## WHAT
 
-- An extension of [VSCode](https://code.visualstudio.com).
 - Display the progress rate of TODO in Markdown file
 
 ## WHY
@@ -15,3 +14,7 @@
 
 - If you have progman installed, nothing will happen!!
 - If you open or edit a markdown file that contains TODO notation, you should see the progress in the lower right.
+
+## DEMO
+
+![](./demo/demo.gif)

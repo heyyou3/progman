@@ -4,7 +4,6 @@
 
 ## WHAT
 
-- [VSCode](https://code.visualstudio.com)の拡張機能です。
 - `.md` ファイルに書かれた TODO の進捗率を表示してくれます。
 
 ## WHY
@@ -15,3 +14,7 @@
 
 - 既に `progman` をインストールしているなら、何もすることはないです！
 - TODO が書かれた `.md` ファイルを開く、もしくは編集すると右下に進捗率を表示してくれます。
+
+## DEMO
+
+![](./demo/demo.gif)
