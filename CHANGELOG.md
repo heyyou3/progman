@@ -6,4 +6,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [0.0.1] - 2019-11-04
+
 - Initial release
+
+## [0.0.2] - 2019-11-04
+
+- Add demo.gif
