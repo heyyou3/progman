@@ -12,6 +12,11 @@
 	"activationEvents": [
 		"onLanguage:markdown"
 	],
+	"publisher": "heyyou",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/heyyou3/progman.git"
+	},
 	"main": "./out/extension.js",
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
