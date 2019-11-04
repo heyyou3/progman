@@ -9,10 +9,10 @@ export function activate({ subscriptions }: vscode.ExtensionContext) {
 	progManStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
 	subscriptions.push(progManStatusBarItem);
 
-	// ファイルを切り替えた際にステータスバーをアップデートする
+	// Update the status bar when switching files
 	subscriptions.push(vscode.window.onDidChangeActiveTextEditor(updateActiveTextEditor));
 
-	// ファイルが書き換わった際にステータスバーをアップデートする
+	// Update the status bar when a file is rewritten
 	subscriptions.push(vscode.workspace.onDidChangeTextDocument(updateChangeTextDocument));
 }
 
