@@ -33,6 +33,10 @@ const updateChangeTextDocument = (event: vscode.TextDocumentChangeEvent): void =
 		const doneCount = activeText.split('- [x] ').length - 1;
 		const allTodoCount = todoCount + doneCount;
 		const progressRate = Math.floor(doneCount / allTodoCount * 100);
+		if (isNaN(progressRate)) {
+			progManStatusBarItem.hide();
+			return;
+		}
 		progManStatusBarItem.text = getProgMsg(progressRate);
 		progManStatusBarItem.show();
 	} else {
