@@ -8,8 +8,8 @@ import * as myExtension from '../../extension';
 suite('Extension Test Suite', () => {
 	const editor = vscode.window.activeTextEditor;
 
-	test('match expect space', () => {
-		assert.equal(myExtension.paddingSpace(9), '---------');
-		assert.equal(myExtension.paddingSpace(0), '');
+	test('expect padding string count', () => {
+		assert.equal(myExtension.paddingStr('-', 10), '----------');
+		assert.equal(myExtension.paddingStr('-', 0), '');
 	});
 });

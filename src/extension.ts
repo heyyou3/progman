@@ -40,35 +40,37 @@ const updateChangeTextDocument = (event: vscode.TextDocumentChangeEvent): void =
 	}
 };
 
-export const paddingHyphen = (n: number): string => {
-	let hyphens = '';
+export const paddingStr = (str: string, n: number): string => {
+	let strings = '';
 	for (let i = 0; i < n; i++) {
-		hyphens += '-';
+		strings += `${str}`;
 	}
-	return hyphens;
+	return strings;
 };
 
 export const displayProgBar = (progressRate: number): string => {
+	const progStr = '=';
+	const noProgStr = '-';
 	if (progressRate <= 0) {
-		return `[${paddingHyphen(10)}]`;
+		return `[${paddingStr(noProgStr, 10)}]`;
 	} else if (progressRate <= 19) {
-		return `[=${paddingHyphen(9)}]`;
+		return `[${paddingStr(progStr, 1) + paddingStr(noProgStr, 9)}]`;
 	} else if (progressRate <= 29) {
-		return `[==${paddingHyphen(8)}]`;
+		return `[${paddingStr(progStr, 2) + paddingStr(noProgStr, 8)}]`;
 	} else if (progressRate <= 39) {
-		return `[===${paddingHyphen(7)}]`;
+		return `[${paddingStr(progStr, 3) + paddingStr(noProgStr, 7)}]`;
 	} else if (progressRate <= 49) {
-		return `[====${paddingHyphen(6)}]`;
+		return `[${paddingStr(progStr, 4) + paddingStr(noProgStr, 6)}]`;
 	} else if (progressRate <= 59) {
-		return `[=====${paddingHyphen(5)}]`;
+		return `[${paddingStr(progStr, 5) + paddingStr(noProgStr, 5)}]`;
 	} else if (progressRate <= 69) {
-		return `[======${paddingHyphen(4)}]`;
+		return `[${paddingStr(progStr, 6) + paddingStr(noProgStr, 4)}]`;
 	} else if (progressRate <= 79) {
-		return `[=======${paddingHyphen(3)}]`;
+		return `[${paddingStr(progStr, 7) + paddingStr(noProgStr, 3)}]`;
 	} else if (progressRate <= 89) {
-		return `[========${paddingHyphen(2)}]`;
+		return `[${paddingStr(progStr, 8) + paddingStr(noProgStr, 2)}]`;
 	} else if (progressRate <= 99) {
-		return `[=========${paddingHyphen(1)}]`;
+		return `[${paddingStr(progStr, 9) + paddingStr(noProgStr, 1)}]`;
 	} else {
 		return `[DONE]`;
 	}
