@@ -32,16 +32,50 @@ const updateChangeTextDocument = (event: vscode.TextDocumentChangeEvent): void =
 		const todoCount = activeText.split('- [ ] ').length - 1;
 		const doneCount = activeText.split('- [x] ').length - 1;
 		const allTodoCount = todoCount + doneCount;
-		const progress = Math.floor(doneCount / allTodoCount * 100);
-		progManStatusBarItem.text = getProgMsg(progress);
+		const progressRate = Math.floor(doneCount / allTodoCount * 100);
+		progManStatusBarItem.text = getProgMsg(progressRate);
 		progManStatusBarItem.show();
 	} else {
 		progManStatusBarItem.hide();
 	}
 };
 
-const getProgMsg = (progress: number): string => {
-	return `進捗率: ${progress}%`;
+export const paddingHyphen = (n: number): string => {
+	let hyphens = '';
+	for (let i = 0; i < n; i++) {
+		hyphens += '-';
+	}
+	return hyphens;
+};
+
+export const displayProgBar = (progressRate: number): string => {
+	if (progressRate <= 0) {
+		return `[${paddingHyphen(10)}]`;
+	} else if (progressRate <= 19) {
+		return `[=${paddingHyphen(9)}]`;
+	} else if (progressRate <= 29) {
+		return `[==${paddingHyphen(8)}]`;
+	} else if (progressRate <= 39) {
+		return `[===${paddingHyphen(7)}]`;
+	} else if (progressRate <= 49) {
+		return `[====${paddingHyphen(6)}]`;
+	} else if (progressRate <= 59) {
+		return `[=====${paddingHyphen(5)}]`;
+	} else if (progressRate <= 69) {
+		return `[======${paddingHyphen(4)}]`;
+	} else if (progressRate <= 79) {
+		return `[=======${paddingHyphen(3)}]`;
+	} else if (progressRate <= 89) {
+		return `[========${paddingHyphen(2)}]`;
+	} else if (progressRate <= 99) {
+		return `[=========${paddingHyphen(1)}]`;
+	} else {
+		return `[DONE]`;
+	}
+};
+
+const getProgMsg = (progressRate: number): string => {
+	return `${displayProgBar(progressRate)} ${progressRate}%`;
 };
 
 // this method is called when your extension is deactivated
